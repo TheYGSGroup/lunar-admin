@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Database\Events\MigrationsStarted;
 use Illuminate\Database\Events\NoPendingMigrations;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -119,7 +118,6 @@ class LunarPanelProvider extends ServiceProvider
         $this->registerPermissionManifest();
         $this->registerStateListeners();
         $this->registerLunarSynthesizer();
-        $this->registerBladeComponentOverride();
         // $this->registerUpgradedListener();
     }
 
@@ -183,16 +181,5 @@ class LunarPanelProvider extends ServiceProvider
     {
         \Lunar\Admin\Support\Facades\AttributeData::synthesizeLivewireProperties();
         Livewire::propertySynthesizer(PriceSynth::class);
-    }
-
-    /**
-     * Register Blade component override to fix Header component dependency resolution issue.
-     */
-    protected function registerBladeComponentOverride(): void
-    {
-        // Override the Header component from leandrocfe/filament-apex-charts
-        // to fix unresolvable dependency issue in Laravel 11
-        // Register with the same alias as the original component
-        Blade::component('filament-apex-charts::header', Header::class);
     }
 }
