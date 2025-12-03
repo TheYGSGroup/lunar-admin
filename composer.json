@@ -14,7 +14,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "ygs/lunar-core": "self.version",
+        "ygs/lunar-core": "^1.1.0",
         "filament/filament": "^3.3.36",
         "filament/spatie-laravel-media-library-plugin": "^3.3.4",
         "spatie/laravel-permission": "^6.12",
