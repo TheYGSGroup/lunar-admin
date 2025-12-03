@@ -2,6 +2,12 @@
 
 All notable changes to this YGS fork will be documented in this file.
 
+## [1.1.0-ygs2] - 2025-12-02
+
+### Test Update
+- Test update to verify versioning and deployment workflow
+- Updated changelog documentation
+
 ## [1.1.0-ygs1] - 2025-12-02
 
 ### Initial Fork
