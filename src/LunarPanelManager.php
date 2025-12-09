@@ -225,10 +225,21 @@ class LunarPanelManager
         ];
 
         if (! $this->twoFactorAuthDisabled) {
-            $plugins[] = TwoFactorAuthenticationPlugin::make()
-                ->enableTwoFactorAuthentication()
-                ->addTwoFactorMenuItem(label: '2FA Settings')
-                ->forceTwoFactorSetup(condition: $this->twoFactorAuthForced);
+            $twoFactorPlugin = TwoFactorAuthenticationPlugin::make();
+            
+            // v2.0+ has enableTwoFactorAuthentication(), v1.0 doesn't
+            if (method_exists($twoFactorPlugin, 'enableTwoFactorAuthentication')) {
+                $twoFactorPlugin->enableTwoFactorAuthentication();
+            }
+            
+            $twoFactorPlugin->addTwoFactorMenuItem(label: '2FA Settings');
+            
+            // v2.0+ has forceTwoFactorSetup(), v1.0 doesn't
+            if (method_exists($twoFactorPlugin, 'forceTwoFactorSetup')) {
+                $twoFactorPlugin->forceTwoFactorSetup(condition: $this->twoFactorAuthForced);
+            }
+            
+            $plugins[] = $twoFactorPlugin;
         }
 
         return Panel::make()
